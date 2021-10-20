@@ -1,6 +1,7 @@
 import React from 'react';
 import classes from './ProfileInfo.module.css';
-import Preloader from '../../common/Preloader/Preloader'
+import Preloader from '../../common/Preloader/Preloader';
+import ProfileStatus from './ProfileStatus';
 
 const ProfileInfo = (props) => {
     
@@ -10,12 +11,12 @@ const ProfileInfo = (props) => {
     
     return (
         <div>
-            <div>
+            {/*<div>
                 <img className={classes.img} src='http://www.catsmob.com/post/2012/06/01089/creative_facebook_timeline_covers_018.jpg'/>
-            </div>
+            </div>*/}
             <div className={classes.descriptionBlock}>
-                <img src={props.profile.photos.large} />
-                ava + description
+                <img src={props.profile.photos.large}/>
+                <ProfileStatus status={'Hello my friends'} />
             </div>
         </div>
     );
