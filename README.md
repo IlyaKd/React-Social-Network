@@ -7,3 +7,4 @@
 + **react-redux**
 + **axios**
 + **redux-thunk**
++ **redux-form**
