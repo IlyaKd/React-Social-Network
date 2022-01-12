@@ -8,3 +8,4 @@
 + **axios**
 + **redux-thunk**
 + **redux-form**
++ **reselect**
