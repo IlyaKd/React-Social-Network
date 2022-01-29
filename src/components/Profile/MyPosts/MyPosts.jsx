@@ -26,7 +26,7 @@ const MyPosts = (props) => {
             </div>   
         </div>
     );
-}
+};
 
 const AddNewPostForm = (props) => {
     return (
