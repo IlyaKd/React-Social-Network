@@ -9,3 +9,4 @@
 + **redux-thunk**
 + **redux-form**
 + **reselect**
++ **classnames**
