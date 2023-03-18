@@ -1,14 +1,19 @@
 import React from 'react';
 import classes from './Post.module.css';
 
-const Post = (props) => {
+type PropsType = {
+    message: string
+    likesCount: number
+}
+
+const Post: React.FC<PropsType> = (props) => {
     return (
         <div className={classes.item}>
             <img src='https://avatarfiles.alphacoders.com/280/thumb-280560.png' />
             {props.message}
             <div>
                 <span>like</span>
-                {props.likeCount}
+                {props.likesCount}
             </div>
         </div>
     );

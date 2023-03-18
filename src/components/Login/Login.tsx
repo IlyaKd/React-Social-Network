@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 import { required } from '../../utils/validators/validators';
-import { Input, createField } from '../common/FormsControls/FormsControls';
+import { Input, createField, GetStringKeys } from '../common/FormsControls/FormsControls';
 import { login } from '../../redux/auth-reducer';
 import { Redirect } from 'react-router-dom';
 import styles from '../common/FormsControls/FormsControls.module.css';
@@ -68,7 +68,8 @@ type LoginFormValuesType = {
     captcha: string
 }
 
-type LoginFormValuesTypeKeys = Extract<keyof LoginFormValuesType, string>
+// type LoginFormValuesTypeKeys = Extract<keyof LoginFormValuesType, string>
+type LoginFormValuesTypeKeys = GetStringKeys<LoginFormValuesType>
 
 const Login: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => {
     const onSubmit = (formData: LoginFormValuesType) => {
