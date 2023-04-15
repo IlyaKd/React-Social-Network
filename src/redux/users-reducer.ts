@@ -1,3 +1,4 @@
+import { APIResponseType } from './../api/api';
 import { UserType } from './../types/types';
 // import {usersAPI} from '../api/api';
 import {usersAPI} from '../api/users-api';
@@ -206,12 +207,12 @@ export const requestUsers = (page: number, pageSize: number): ThunkType => {
 
 const _followUnfollowFlow = async (dispatch: Dispatch<ActionsTypes>, 
                                     userId: number, 
-                                    apiMethod: any, 
+                                    apiMethod: (userId: number) => Promise<APIResponseType>, 
                                     actionCreator: (userId: number) => /*FollowSuccessActionType | UnfollowSuccessActionType*/ ActionsTypes) => {
     dispatch(actions.toggleFollowingProgress(true, userId));
     let response = await apiMethod(userId);
 
-    if (response.data.resultCode === 0) {
+    if (response.resultCode === 0) {
         dispatch(actionCreator(userId))
     }
     dispatch(actions.toggleFollowingProgress(false, userId));
@@ -219,18 +220,18 @@ const _followUnfollowFlow = async (dispatch: Dispatch<ActionsTypes>,
 
 export const follow = (userId: number): ThunkType => {
     return async (dispatch) => {
-        _followUnfollowFlow(dispatch, userId, usersAPI.follow.bind(usersAPI), actions.followSuccess);
+        await _followUnfollowFlow(dispatch, userId, usersAPI.follow.bind(usersAPI), actions.followSuccess);
     }
 }
 
 export const unfollow = (userId: number): ThunkType => {
     return async (dispatch) => {
-        _followUnfollowFlow(dispatch, userId, usersAPI.unfollow.bind(usersAPI), actions.unfollowSuccess);
+        await _followUnfollowFlow(dispatch, userId, usersAPI.unfollow.bind(usersAPI), actions.unfollowSuccess);
     }
 }
 
 export default usersReducer;
 
-type InitialState = typeof initialState;
+export type InitialState = typeof initialState;
 type ActionsTypes = InferActionsTypes<typeof actions>
 type ThunkType = BaseThunkType<ActionsTypes>
